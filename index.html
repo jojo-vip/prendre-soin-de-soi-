@@ -176,116 +176,171 @@
             cursor: pointer;
         }
 
-        /* IMC */
+        /* IMC - Nouveau design */
         .imc-calculator {
-            background: linear-gradient(to bottom, #6699cc 0%, #99ccff 100%);
-            padding: 40px;
+            background-color: #f5f5f5;
+            padding: 60px 40px;
+            min-height: 600px;
         }
 
         .imc-calculator h2 {
-            background-color: white;
             color: #333;
             text-align: center;
-            padding: 15px;
-            margin-bottom: 30px;
-            border: 2px solid #333;
-            font-size: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: normal;
+            margin-bottom: 50px;
         }
 
         .imc-form {
-            background-color: rgba(255,255,255,0.9);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
+            text-align: center;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .imc-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #0066cc;
-            border-radius: 5px;
+        .imc-inputs input {
+            width: 140px;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             font-size: 1rem;
+            text-align: center;
         }
 
         .btn-calculate {
-            background-color: #0066cc;
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            background-color: white;
+            color: #333;
+            padding: 12px 40px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: normal;
             cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
 
         .btn-calculate:hover {
-            background-color: #0052a3;
+            background-color: #f0f0f0;
+            border-color: #999;
         }
 
-        .imc-result {
-            margin-top: 30px;
-            padding: 25px;
-            background-color: white;
-            border-radius: 10px;
-            border-left: 5px solid #0066cc;
-            display: none;
+        .imc-instruction {
+            margin: 30px 0;
+            font-size: 1.1rem;
+            color: #666;
         }
 
-        .imc-result.show {
-            display: block;
+        .imc-gauge {
+            margin: 50px auto;
+            max-width: 500px;
+            position: relative;
         }
 
-        .imc-result h3 {
-            color: #0066cc;
-            margin-bottom: 15px;
+        .gauge-container {
+            position: relative;
+            width: 100%;
+            padding-top: 50%;
         }
 
-        .imc-value {
-            font-size: 2.5rem;
+        .gauge-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gauge-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: -40px;
+            padding: 0 60px;
+        }
+
+        .gauge-label {
+            font-size: 1rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .imc-needle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            height: 45%;
+            background-color: #333;
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(0deg);
+            transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+            z-index: 10;
+        }
+
+        .imc-needle::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background-color: #333;
+            border-radius: 50%;
+        }
+
+        .imc-result-value {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #0066cc;
-            margin: 15px 0;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .imc-result-value.show {
+            opacity: 1;
         }
 
         .imc-interpretation {
+            text-align: center;
+            margin-top: 20px;
             padding: 15px;
             border-radius: 5px;
-            margin-top: 15px;
-            font-weight: bold;
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .imc-interpretation.show {
+            opacity: 1;
         }
 
         .imc-interpretation.maigreur {
-            background-color: #fff3cd;
-            color: #856404;
+            background-color: #28a745;
+            color: white;
         }
 
         .imc-interpretation.normal {
-            background-color: #d4edda;
-            color: #155724;
+            background-color: #28a745;
+            color: white;
         }
 
         .imc-interpretation.surpoids {
-            background-color: #fff3cd;
-            color: #856404;
+            background-color: #ffc107;
+            color: #333;
         }
 
         .imc-interpretation.obesite {
-            background-color: #f8d7da;
-            color: #721c24;
+            background-color: #dc3545;
+            color: white;
         }
 
         /* Cursus */
@@ -468,6 +523,25 @@
             margin: 0 auto;
         }
 
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #0066cc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -541,6 +615,10 @@
 
             .tarifs-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .gauge-labels {
+                padding: 0 30px;
             }
         }
     </style>
@@ -631,33 +709,47 @@
         <!-- Page Calculateur IMC -->
         <div id="page-imc" class="page">
             <div class="imc-calculator">
-                <h2>Calculateur d'IMC (Indice de Masse Corporelle)</h2>
+                <h2>Calculateur d'IMC</h2>
                 
                 <div class="imc-form">
-                    <div class="form-group">
-                        <label for="poids">Votre poids (en kg) :</label>
-                        <input type="number" id="poids" placeholder="Ex: 70" step="0.1" min="20" max="300">
+                    <div class="imc-inputs">
+                        <input type="number" id="taille" placeholder="Taille (cm)" step="1" min="100" max="250">
+                        <input type="number" id="poids" placeholder="Poids (kg)" step="0.1" min="20" max="300">
+                        <button class="btn-calculate" onclick="calculerIMC()">Calculer</button>
                     </div>
 
-                    <div class="form-group">
-                        <label for="taille">Votre taille (en cm) :</label>
-                        <input type="number" id="taille" placeholder="Ex: 175" step="1" min="100" max="250">
+                    <p class="imc-instruction">Entrez vos données</p>
+
+                    <div class="imc-gauge">
+                        <div class="gauge-container">
+                            <svg class="gauge-svg" viewBox="0 0 200 100">
+                                <defs>
+                                    <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#28a745;stop-opacity:1" />
+                                        <stop offset="33%" style="stop-color:#28a745;stop-opacity:1" />
+                                        <stop offset="50%" style="stop-color:#ffc107;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#dc3545;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M 20,90 A 80,80 0 0,1 180,90" 
+                                      fill="none" 
+                                      stroke="url(#gaugeGradient)" 
+                                      stroke-width="25" 
+                                      stroke-linecap="round"/>
+                                <line x1="20" y1="90" x2="100" y2="90" stroke="#333" stroke-width="2"/>
+                                <line x1="100" y1="90" x2="180" y2="90" stroke="#333" stroke-width="2"/>
+                            </svg>
+                            <div class="imc-needle" id="imc-needle"></div>
+                        </div>
+                        <div class="gauge-labels">
+                            <span class="gauge-label">Maigre</span>
+                            <span class="gauge-label">Normal</span>
+                            <span class="gauge-label">Obèse</span>
+                        </div>
                     </div>
 
-                    <button class="btn-calculate" onclick="calculerIMC()">Calculer mon IMC</button>
-
-                    <div id="imc-result" class="imc-result">
-                        <h3>Votre résultat :</h3>
-                        <div class="imc-value" id="imc-value"></div>
-                        <div class="imc-interpretation" id="imc-interpretation"></div>
-                        <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">
-                            <strong>Rappel des catégories :</strong><br>
-                            Moins de 18.5 : Maigreur<br>
-                            18.5 - 24.9 : Poids normal<br>
-                            25 - 29.9 : Surpoids<br>
-                            30 et plus : Obésité
-                        </p>
-                    </div>
+                    <div id="imc-result-value" class="imc-result-value"></div>
+                    <div id="imc-interpretation" class="imc-interpretation"></div>
                 </div>
             </div>
         </div>
@@ -809,7 +901,7 @@
                         <textarea id="objectifs" placeholder="Décrivez vos objectifs de remise en forme..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn-calculate">Envoyer ma demande</button>
+                    <button type="submit" class="btn-calculate" style="width: 100%; padding: 15px;">Envoyer ma demande</button>
 
                     <div id="success-message" class="success-message">
                         <h3>✓ Inscription réussie !</h3>
@@ -850,7 +942,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Calcul IMC
+        // Calcul IMC avec animation de l'aiguille
         function calculerIMC() {
             var poids = parseFloat(document.getElementById('poids').value);
             var tailleCm = parseFloat(document.getElementById('taille').value);
@@ -864,26 +956,44 @@
             var imc = poids / (tailleM * tailleM);
             var imcArrondi = imc.toFixed(1);
 
-            document.getElementById('imc-value').textContent = imcArrondi;
+            // Afficher la valeur IMC
+            var resultValue = document.getElementById('imc-result-value');
+            resultValue.textContent = 'IMC: ' + imcArrondi;
+            resultValue.classList.add('show');
 
+            // Calculer l'angle de l'aiguille (-90° à 90°)
+            // IMC 15 = -90°, IMC 25 = 0°, IMC 35 = 90°
+            var angle;
+            if (imc < 15) {
+                angle = -90;
+            } else if (imc > 35) {
+                angle = 90;
+            } else {
+                angle = ((imc - 25) / 10) * 90;
+            }
+
+            var needle = document.getElementById('imc-needle');
+            needle.style.transform = 'translateX(-50%) rotate(' + angle + 'deg)';
+
+            // Interprétation
             var interpretation = document.getElementById('imc-interpretation');
             interpretation.className = 'imc-interpretation';
 
             if (imc < 18.5) {
                 interpretation.classList.add('maigreur');
-                interpretation.innerHTML = '<strong>Maigreur</strong><br>Votre IMC indique une insuffisance pondérale. Il est recommandé de consulter un professionnel de santé pour établir un programme adapté.';
+                interpretation.innerHTML = '<strong>Maigreur</strong><br>Votre IMC indique une insuffisance pondérale.';
             } else if (imc >= 18.5 && imc < 25) {
                 interpretation.classList.add('normal');
-                interpretation.innerHTML = '<strong>Poids normal</strong><br>Félicitations ! Votre IMC est dans la norme. Continuez à maintenir une alimentation équilibrée et une activité physique régulière.';
+                interpretation.innerHTML = '<strong>Poids normal</strong><br>Félicitations ! Votre IMC est dans la norme.';
             } else if (imc >= 25 && imc < 30) {
                 interpretation.classList.add('surpoids');
-                interpretation.innerHTML = '<strong>Surpoids</strong><br>Votre IMC indique un léger surpoids. Un programme de remise en forme pourrait vous aider à retrouver un poids santé. Je peux vous accompagner !';
+                interpretation.innerHTML = '<strong>Surpoids</strong><br>Votre IMC indique un léger surpoids.';
             } else {
                 interpretation.classList.add('obesite');
-                interpretation.innerHTML = '<strong>Obésité</strong><br>Votre IMC indique une obésité. Il est important de consulter un professionnel de santé et de commencer un programme adapté. Je suis là pour vous accompagner dans cette démarche.';
+                interpretation.innerHTML = '<strong>Obésité</strong><br>Votre IMC indique une obésité.';
             }
 
-            document.getElementById('imc-result').classList.add('show');
+            interpretation.classList.add('show');
         }
 
         // Formulaire
@@ -911,7 +1021,7 @@
         }
 
         // Enter pour calcul
-        document.getElementById('taille').addEventListener('keypress', function(event) {
+        document.getElementById('poids').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 calculerIMC();
             }
